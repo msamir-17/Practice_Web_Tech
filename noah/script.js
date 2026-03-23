@@ -1,11 +1,11 @@
 let ctn = document.querySelector(".p_container");
 console.log(ctn);
-
+ let data = [];
 fetch("https://dummyjson.com/product")
     .then((e) => e.json())
     .then((e) => {
         // console.log(e.products);
-        let data = e.products;
+        data = e.products;
         displayData(data);
     })
     .catch((err) => {
@@ -51,7 +51,7 @@ function displayData(product) {
           <span class="ml-1 text-gray-600">${rating} (120 reviews)</span>
         </div>
       </div>
-      <button class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+      <button onclick="addToCart(${id})" class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
             Add to Cart
       </button>
     </div>
@@ -65,4 +65,20 @@ function displayData(product) {
       console.log(id)
       localStorage.setItem("productId",id)
       window.location.href="/productView.html";
+    }
+   
+
+    function addToCart(id) {
+      let result = data.find((val) =>{ return val.id == id})
+      console.log(result);
+      // let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      // let isExist = cartItems.find((val) => { return val.id == id})
+      // if(isExist){
+      //   alert("Product already in cart!");
+      // }
+      // else{
+      //   cartItems.push(result);
+      //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      //   alert("Product added to cart!");
+      // }
     }
