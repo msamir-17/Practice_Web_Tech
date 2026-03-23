@@ -1,6 +1,6 @@
 let ctn = document.querySelector(".p_container");
 console.log(ctn);
- let data = [];
+let data = [];
 fetch("https://dummyjson.com/product")
     .then((e) => e.json())
     .then((e) => {
@@ -30,7 +30,7 @@ function displayData(product) {
     <div class="relative">
       <div class="absolute inset-0 bg-gradient-to-br from-purple-400 to-indigo-600 opacity-75"></div>
     <a href="./productView.html" class="">
-      <img onclick="getid(${id})" src=" ${img}" alt="Product Image" class="w-full h-64 object-cover object-center relative z-10">
+      <img onclick="getid(${id})" src=" ${img}" alt="Product Image" class="w-full h-64 object-fit-cover object-center relative z-10">
     </a>
       <div
         class="absolute top-4 right-4 bg-gray-100 text-xs font-bold px-3 py-2 rounded-full z-20 transform rotate-12">
@@ -71,14 +71,14 @@ function displayData(product) {
     function addToCart(id) {
       let result = data.find((val) =>{ return val.id == id})
       console.log(result);
-      // let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      // let isExist = cartItems.find((val) => { return val.id == id})
-      // if(isExist){
-      //   alert("Product already in cart!");
-      // }
-      // else{
-      //   cartItems.push(result);
-      //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      //   alert("Product added to cart!");
-      // }
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      let isExist = cartItems.find((val) => { return val.id == id})
+      if(isExist){
+        alert("Product already in cart!");
+      }
+      else{
+        cartItems.push(result);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        alert("Product added to cart!");
+      }
     }
